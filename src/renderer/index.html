@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Local Spending Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">Local Spending Tracker</div>
+            <nav>
+                <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+                <button class="nav-btn" data-view="transactions">Transactions</button>
+                <button class="nav-btn" data-view="import">Import</button>
+                <button class="nav-btn" data-view="settings">Settings</button>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view">
+                <h2>Dashboard</h2>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>MoM Spending by Category</h3>
+                        <canvas id="mom-category-chart"></canvas>
+                    </div>
+                    <div class="card">
+                        <h3>Category Breakdown</h3>
+                        <canvas id="category-breakdown-chart"></canvas>
+                    </div>
+                    <div class="card">
+                        <h3>Recent Transactions</h3>
+                        <div class="amount-filter">
+                            <label>Amount Range:</label>
+                            <input type="number" id="min-amount" placeholder="Min" step="0.01">
+                            <input type="number" id="max-amount" placeholder="Max" step="0.01">
+                            <button id="apply-amount-filter">Apply</button>
+                            <button id="clear-amount-filter">Clear</button>
+                        </div>
+                        <div id="recent-transactions"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions View -->
+            <div class="view hidden" id="transactions-view">
+                <h1>Transactions</h1>
+                <div class="transactions-controls">
+                    <input type="text" id="transaction-search" placeholder="Search transactions...">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                    </select>
+                    <input type="date" id="date-filter">
+                </div>
+                <div class="transactions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Vendor</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Import View -->
+            <div class="view hidden" id="import-view">
+                <h1>Import Transactions</h1>
+                <div class="import-container">
+                    <div class="drop-zone" id="drop-zone">
+                        <p>Drag and drop CSV files here</p>
+                        <p>or</p>
+                        <button id="select-files">Select Files</button>
+                    </div>
+                    <div class="import-progress hidden" id="import-progress">
+                        <div class="progress-bar">
+                            <div class="progress" id="progress-bar"></div>
+                        </div>
+                        <p id="progress-text">Processing...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view hidden">
+                <h2>Settings</h2>
+                
+                <!-- Theme Settings -->
+                <div class="settings-section">
+                    <h3>Theme</h3>
+                    <div class="setting-item">
+                        <label for="theme-select">Theme:</label>
+                        <select id="theme-select">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Categories Section -->
+                <div class="settings-section">
+                    <h3>Categories</h3>
+                    <div class="categories-list" id="categories-list">
+                        <!-- Categories will be populated here -->
+                    </div>
+                    <div class="category-actions">
+                        <button id="add-category-btn" class="btn">Add New Category</button>
+                    </div>
+                </div>
+
+                <!-- Data Management Section -->
+                <div class="settings-section">
+                    <h3>Data Management</h3>
+                    <div class="setting-item">
+                        <span>Clear All Data</span>
+                        <button id="clear-all-data-btn" class="delete-btn">Clear All Data</button>
+                    </div>
+                    <p class="warning-text">Warning: This action cannot be undone. All transactions, categories, and settings will be permanently deleted.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categorization Modal -->
+    <div class="modal hidden" id="categorization-modal">
+        <div class="modal-content">
+            <h2>Categorize Transaction</h2>
+            <div class="modal-details">
+                <p><strong>Date:</strong> <span id="modal-date"></span></p>
+                <p><strong>Vendor:</strong> <span id="modal-vendor"></span></p>
+                <p><strong>Amount:</strong> <span id="modal-amount"></span></p>
+                <p><strong>Description:</strong> <span id="modal-description"></span></p>
+            </div>
+            <div class="modal-form">
+                <div class="form-group">
+                    <label for="category-select">Category:</label>
+                    <select id="category-select">
+                        <option value="">Select a category</option>
+                    </select>
+                    <button id="new-category-btn">New Category</button>
+                </div>
+                <div class="form-group">
+                    <label for="category-color-picker">Category Color:</label>
+                    <input type="color" id="category-color-picker" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="recurring-toggle">
+                        Recurring Transaction
+                    </label>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="save-categorization">Save</button>
+                <button id="cancel-categorization">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html> 
