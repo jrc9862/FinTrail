@@ -1,5 +1,5 @@
 {
-  "name": "local-spending-tracker",
+  "name": "fintrail",
   "version": "1.0.0",
   "description": "A desktop application for tracking and analyzing local spending patterns",
   "main": "src/main/main.js",
@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "keywords": ["finance", "budgeting", "electron", "local-first"],
-  "author": "",
+  "author": "James",
   "license": "MIT",
   "dependencies": {
     "sqlite3": "^5.1.7",

@@ -1,6 +1,6 @@
 # FinTrail - Personal Finance Tracker
 
-FinTrail is an Electron-based desktop application for tracking personal finances, managing transactions, and analyzing spending patterns.
+FinTrail is an Electron-based desktop application for tracking personal finances and analyzing spending patterns. Very much a work in progress. Mostly a project to better my JS and Node.js with some personal utility.
 
 ## Features
 
@@ -10,6 +10,11 @@ FinTrail is an Electron-based desktop application for tracking personal finances
 - CSV import support
 - Dark/Light theme support
 - Recurring transaction tracking
+
+## Roadmap
+
+- More chart options
+- More csv formats accepted
 
 ## Installation
 
@@ -45,4 +50,4 @@ npm start
 
 ## License
 
-MIT License 
+MIT License
