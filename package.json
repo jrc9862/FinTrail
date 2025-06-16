@@ -8,14 +8,19 @@
     "build": "electron-builder",
     "test": "jest"
   },
-  "keywords": ["finance", "budgeting", "electron", "local-first"],
+  "keywords": [
+    "finance",
+    "budgeting",
+    "electron",
+    "local-first"
+  ],
   "author": "James",
   "license": "MIT",
   "dependencies": {
-    "sqlite3": "^5.1.7",
     "chart.js": "^4.4.1",
     "csv-parse": "^5.5.3",
-    "electron-store": "^8.1.0"
+    "electron-store": "^8.1.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "electron": "^28.1.0",
